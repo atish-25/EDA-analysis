@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from ydata_profiling import ProfileReport
-from streamlit_pandas_profiling import st_profile_report
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
@@ -178,7 +178,11 @@ if uploaded_file is not None:
 
             st.subheader("Full EDA Report")
 
-            st_profile_report(profile)
+            st.components.v1.html(
+                profile.to_html(),
+                height=1000,
+                scrolling=True
+            )
 
             profile.to_file("EDA_Report.html")
 
